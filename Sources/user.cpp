@@ -3,12 +3,18 @@ using namespace std;
 
 
 
-void User::SetName(string name) {
+void User::SetName(string name)
+{
 	user_name = name;
-	}
-void User::SetSequence(string sequence) {
+}
+void User::SetSequence(string sequence)
+{
 	user_dna_sequence = sequence;
-	}
+}
+void User::FrameSetting()
+{
+
+}
 string User::GetName() {
 	return user_name;
 }

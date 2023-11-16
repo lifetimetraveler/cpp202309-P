@@ -3,11 +3,22 @@
 using namespace std;
 
 class User {
-	string user_name;
-	string user_dna_sequence;
+	string user_name;//유저의 이름
+	string user_dna_sequence;//유저의 DNA서열을 받는 변수
+
+	//dna1~6은 DNA 서열을 앞뒤로 읽은 경우(2)*DNA의 맨 앞 서열을 무엇으로하냐 (3)
+	// DNA의 codon은 세 DNA서열이 묶인것이기때문에
+	//세가지로 읽을 수 있다. 
+	string dna1;
+	string dna2;
+	string dna3;
+	string dna4;
+	string dna5;
+	string dna6;
 public:
-	void SetName(string name);
-	void SetSequence(string sequence);
-	string GetName();
-	string GetSequence();
+	void SetName(string name);//이름을 초기화하는 함수
+	void SetSequence(string sequence);//서열을 초기화하는 함수
+	void FrameSetting();//codon의 frame을 설정하는 함수
+	string GetName();//이름을 반환하는 함수
+	string GetSequence();//서열을 반환하는 함수
 };
