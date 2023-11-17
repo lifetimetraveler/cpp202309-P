@@ -9,13 +9,14 @@ class User {
 	//dna1~6은 DNA 서열을 앞뒤로 읽은 경우(2)*DNA의 맨 앞 서열을 무엇으로하냐 (3)
 	// DNA의 codon은 세 DNA서열이 묶인것이기때문에
 	//세가지로 읽을 수 있다. 
+	
+public:
 	string dna1;
 	string dna2;
 	string dna3;
-	string dna4;
-	string dna5;
-	string dna6;
-public:
+	string reverse_dna1;
+	string reverse_dna2;
+	string reverse_dna3;
 	void SetName(string name);//이름을 초기화하는 함수
 	void SetSequence(string sequence);//서열을 초기화하는 함수
 	void FrameSetting();//codon의 frame을 설정하는 함수
