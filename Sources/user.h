@@ -1,5 +1,6 @@
 #include<iostream>
 #include<string>
+#include<vector>
 using namespace std;
 
 class User {
@@ -22,4 +23,18 @@ public:
 	void FrameSetting();//codon의 frame을 설정하는 함수
 	string GetName();//이름을 반환하는 함수
 	string GetSequence();//서열을 반환하는 함수
+};
+
+class Orf
+{
+
+public:
+	vector<string> orf1;
+	vector<string> orf2;
+	vector<string> orf3;
+	vector<string> reverse_orf1;
+	vector<string> reverse_orf2;
+	vector<string> reverse_orf3;
+	void TransferSeq(User user);
+
 };
