@@ -42,5 +42,5 @@ public:
 	vector<string> reverse_orf2;
 	vector<string> reverse_orf3;
 	void TransferSeq(User user);
-
+	void OrfFinder();
 };

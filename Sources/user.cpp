@@ -68,10 +68,15 @@ string User::GetRDna3() {
 
 void Orf::TransferSeq(User user)
 {
-	string temp_org = user.GetDna1();
-	for (int i; i < ;)
+	string temp_orf = user.GetDna1();
+	for (int i=0; i < temp_orf.length();i+=3)
 	{
-		orf1.push_back(user.)
+		string triplet = temp_orf.substr(i,3);
+		orf1.push_back(triplet);
 	}
+}
+void Orf::OrfFinder()
+{
+	string 
 }
 
