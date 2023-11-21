@@ -45,4 +45,33 @@ string User::GetName() {
 string User::GetSequence() {
 	return user_dna_sequence;
 }
+string User::GetDna1() {
+	return dna1;
+}
+string User::GetDna2() {
+	return dna2;
+}
+string User::GetDna3() {
+	return dna3;
+}
+string User::GetRDna1() {
+	return reverse_dna1;
+}
+string User::GetRDna2() {
+	return reverse_dna2;
+}
+string User::GetRDna3() {
+	return reverse_dna3;
+}
+
+
+
+void Orf::TransferSeq(User user)
+{
+	string temp_org = user.GetDna1();
+	for (int i; i < ;)
+	{
+		orf1.push_back(user.)
+	}
+}
 

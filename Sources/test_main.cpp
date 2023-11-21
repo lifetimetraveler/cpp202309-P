@@ -19,13 +19,13 @@ int main() {
 	cout << "¼­¿­: " << user1.GetSequence() << endl;
 
 	user1.FrameSetting();
-cout << "dna2: " << user1.dna2 << endl;
-cout << "dna3: " << user1.dna3 << endl;
-	cout << "dna4:" << user1.reverse_dna1 << endl;
-	cout << "dna5:" << user1.reverse_dna2<<endl;
-	cout << "dna6:" << user1.reverse_dna3 << endl;
+cout << "dna2: " << user1.GetDna2() << endl;
+cout << "dna3: " << user1.GetDna3() << endl;
+	cout << "dna4:" << user1.GetRDna1() << endl;
+	cout << "dna5:" << user1.GetRDna2()<<endl;
+	cout << "dna6:" << user1.GetRDna3() << endl;
 	
 
-	cout << "dna1:" << user1.GetSequence() << endl;
+	cout << "dna1:" << user1.GetDna1() << endl;
 	return 0;
 }
