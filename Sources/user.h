@@ -17,7 +17,10 @@ class User {
 	//세가지로 읽을 수 있다. 
 	
 public:
-	
+	int length1=0;
+	int length2=0;
+
+
 	void SetName(string name);//이름을 초기화하는 함수
 	void SetSequence(string sequence);//서열을 초기화하는 함수
 	void FrameSetting();//codon의 frame을 설정하는 함수
@@ -35,12 +38,23 @@ class Orf
 {
 
 public:
+	
+	vector<vector<string>> complete_orf;
 	vector<string> orf1;
+	vector<int> atg_index;
+	vector<int> tga_index;
+	vector<int> taa_index;
+	vector<int> tag_index;
+
 	vector<string> orf2;
 	vector<string> orf3;
 	vector<string> reverse_orf1;
 	vector<string> reverse_orf2;
 	vector<string> reverse_orf3;
+
+
 	void TransferSeq(User user);
-	void OrfFinder();
+	void IndexFinder();
+	void OrfFinder(User user);
+	
 };
