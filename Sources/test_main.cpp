@@ -4,55 +4,56 @@ using namespace std;
 
 
 int main() {
-	string name;
-	string sequence;
+	string name;//유저의 이름
+	string sequence;//유저의 서열
 	
-	User user1;
-	Orf user1o;
+	User user;//User의 이름, 서열, ORF범위, 다른 reading frame서열을
+	          //저장하는 클래스
+	
 	cout << "이름";
-	name = "하하호호";
+	//name = "하하호호";
 	cout << "DNA서열:";
-	//cin >> name;
-	sequence = "AGCCAAAAAATGGGGAAAGGGAAACCCAAAGGGTGATTTGGGAAA";
-	//cin >> sequence;
+	cin >> name;
+	//sequence = "AGCCAAAAAATGGGGAAAGGGAAACCCAAAGGGTGATTTGGGAAA";
+	cin >> sequence;
 	cout << "찾고자하는 ORF의 크기 : ";
-	//cin>>length>>length1;
-	user1.length1 = 1;
-	user1.length2 = 100;
+	cin >> user.length1 >> user.length2;//ORF의 범위를 입력
+	//user.length1 = 1;
+	//user.length2 = 100;
 
-	user1.SetName(name);
-	user1.SetSequence(sequence);
+	user.SetName(name);//객체내의 이름초기화
+	user.SetSequence(sequence);//객체내의 서열 초기화
 
-	cout << "이름:" << user1.GetName() << endl;
-	cout << "서열: " << user1.GetSequence() << endl;
+	cout << "이름:" << user.GetName() << endl;
+	cout << "서열: " << user.GetSequence() << endl;
 
-	user1.FrameSetting();
-	cout << "dna2: " << user1.GetDna2() << endl;
-	cout << "dna3: " << user1.GetDna3() << endl;
-	cout << "dna4:" << user1.GetRDna1() << endl;
-	cout << "dna5:" << user1.GetRDna2() << endl;
-	cout << "dna6:" << user1.GetRDna3() << endl;
-	cout << "dna1:" << user1.GetDna1() << endl;
-	user1o.TransferSeq(user1);
+	user.FrameSetting();
+	cout << "dna2: " << user.GetDna2() << endl;
+	cout << "dna3: " << user.GetDna3() << endl;
+	cout << "dna4:" << user.GetRDna1() << endl;
+	cout << "dna5:" << user.GetRDna2() << endl;
+	cout << "dna6:" << user.GetRDna3() << endl;
+	cout << "dna1:" << user.GetDna1() << endl;
 
+	Orf user_seq1(user.GetDna1());//Orf객체에 분석할 서열 전달
+	user_seq1.TransferSeq();//서열의 스트링 벡터화
 
+	
 	cout << "벡터" << endl;
-	for (int i = 0; i < user1o.orf1.size(); i++)
+	for (int i = 0; i < user_seq1.orf1.size(); i++)
 	{
-		cout<<user1o.orf1[i]<<" ";
+		cout<<user_seq1.orf1[i]<<" ";
 	}
 	cout << endl;
+	user_seq1.IndexFinder();//인덱스 찾기
+	user_seq1.OrfFinder(user);//orf 찾기
 
-	user1o.IndexFinder();
 
-	user1o.OrfFinder(user1);
-
-	cout << user1o.complete_orf[0].size()<<endl;
 	
-	
-	for (int i = 0; i < user1o.complete_orf[0].size(); i++)
+	//완료한 orf 출력
+	for (int i = 0; i < user_seq1.complete_orf[0].size(); i++)
 	{
-		cout << user1o.complete_orf[0][i] << " ";
+		cout << user_seq1.complete_orf[0][i] << " ";
 	}
 
 

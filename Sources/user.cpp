@@ -65,16 +65,17 @@ string User::GetRDna3() {
 }
 
 
-
-void Orf::TransferSeq(User user)
+//스트링형태의 서열을 세개씩 나눠서 스트링 벡터에 저장하여
+//추후에 가공을 쉽게한다.
+void Orf::TransferSeq()//
 {
-	string temp_orf = user.GetDna1();
-	for (int i=0; i < temp_orf.length();i+=3)
+	for (int i=0; i < original_seq.length();i+=3)
 	{
-		string triplet = temp_orf.substr(i,3);
+		string triplet = original_seq.substr(i,3);
 		orf1.push_back(triplet);
 	}
 }
+//가공한 서열의 start codon과 stop codon의 인덱스를 저장하는 함수
 void Orf::IndexFinder()
 {
 	for (int i = 0; i < orf1.size(); i++)
@@ -108,7 +109,7 @@ void Orf::OrfFinder(User user)
 		{
 			if (atg_index[i] < tga_index[j])
 			{
-				if (tga_index[j] - atg_index[i]+1 > length1 && tga_index[j] - atg_index[i] +1< length2)
+				if (tga_index[j] - atg_index[i]+1 >= length1 && tga_index[j] - atg_index[i] +1<= length2)
 				{
 					vector<string> temp_com_orf(orf1.begin() + atg_index[i], orf1.begin() + tga_index[j]+1);
 					complete_orf.push_back(temp_com_orf);
@@ -119,7 +120,7 @@ void Orf::OrfFinder(User user)
 		{
 			if (atg_index[i] < taa_index[j])
 			{
-				if (taa_index[j] - atg_index[i] + 1 > length1 && taa_index[j] - atg_index[i] + 1 < length2)
+				if (taa_index[j] - atg_index[i] + 1 >= length1 && taa_index[j] - atg_index[i] + 1 <= length2)
 				{
 					vector<string> temp_com_orf(orf1.begin() + atg_index[i], orf1.begin() + taa_index[j] + 1);
 					complete_orf.push_back(temp_com_orf);
@@ -130,7 +131,7 @@ void Orf::OrfFinder(User user)
 		{
 			if (atg_index[i] < tag_index[j])
 			{
-				if (tag_index[j] - atg_index[i] + 1 > length1 && tag_index[j] - atg_index[i] + 1 < length2)
+				if (tag_index[j] - atg_index[i] + 1 >= length1 && tag_index[j] - atg_index[i] + 1 <= length2)
 				{
 					vector<string> temp_com_orf(orf1.begin() + atg_index[i], orf1.begin() + tag_index[j] + 1);
 					complete_orf.push_back(temp_com_orf);
