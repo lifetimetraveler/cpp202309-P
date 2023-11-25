@@ -50,7 +50,7 @@ int main() {
 	cout << "dna1:" << user.GetDna1() << endl;
 
 
-
+	//각 6개의 서열에 대해 같은 방법으로 분석. 6번 반복
 	Orf user_seq1(user.GetDna1());//Orf객체에 분석할 서열 전달및 Orf 객체 생성
 	user_seq1.TransferSeq();//서열의 스트링 벡터화
 	cout << "벡터화dna1: ";

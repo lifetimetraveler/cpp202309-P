@@ -43,8 +43,8 @@ class Orf
 	
 
 public:
-string original_seq;
-	Orf(string original_seq) { this->original_seq = original_seq; }
+string original_seq;//받아온 분석할 서열을 저장
+	Orf(string original_seq) { this->original_seq = original_seq; }//생성자
 	vector<string> orf1;//처리과정을 매끄럽게하기위해 스트링으로 세개씩 나누어서 저장
 	vector<vector<string>> complete_orf;//orf를 추출한 벡터를 저장하기위한 이중 벡터
 
@@ -56,11 +56,11 @@ string original_seq;
 	vector<int> taa_index;
 	vector<int> tag_index;
 
-	//
+	//서열을 벡터화하는 함수
 	void TransferSeq();
-	//
+	//벡터화한 서열에서 stop, start codon을 찾는 함수
 	void IndexFinder();
-	//
+	//찾아낸 인덱스에 맞춰 서열을 저장하는 함수
 	void OrfFinder(User user);
 	
 };

@@ -36,8 +36,6 @@ void User::FrameSetting()//reading frame을 바꿔서 서열을 저장하는 함수
 
 	 //맨 앞 둘을 지워서 frameshift
 	reverse_dna3 = temp_dna.erase(0, 1);//유저의 역방향, +2 reding frame DNA 저장
-
-
 }
 string User::GetName() {//사용자 이름반환
 	return user_name;
