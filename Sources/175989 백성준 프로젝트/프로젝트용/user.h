@@ -2,7 +2,14 @@
 #include<string>
 #include<vector>
 using namespace std;
-
+class SavedIndex
+{
+	int complete_atg;
+	int complete_tga;
+	int complete_taa;
+	int complete_tag;
+	
+};
 
 //유저의 이름, 유저의 서열, 찾고자 하는 orf의 길이범위, reading frame을 바꾼 서열의
 //  저장을 위한 클래스
@@ -40,10 +47,10 @@ public:
 //하나의 reading frame에서 orf를 찾고 그것을 저장하는 클래스
 class Orf
 {
-	
+	string original_seq;//받아온 분석할 서열을 저장
 
 public:
-string original_seq;//받아온 분석할 서열을 저장
+	//vector<SavedIndex> complete_index;
 	Orf(string original_seq) { this->original_seq = original_seq; }//생성자
 	vector<string> orf1;//처리과정을 매끄럽게하기위해 스트링으로 세개씩 나누어서 저장
 	vector<vector<string>> complete_orf;//orf를 추출한 벡터를 저장하기위한 이중 벡터
@@ -64,3 +71,4 @@ string original_seq;//받아온 분석할 서열을 저장
 	void OrfFinder(User user);
 	
 };
+
