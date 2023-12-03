@@ -24,7 +24,7 @@ void User::FrameSetting()//reading frame을 바꿔서 서열을 저장하는 함수
 	//맨 앞 둘을 지워서 frameshift
 	dna3 = temp_dna.erase(0,1);//유저의 정방향, +2 reding frame DNA 저장
 
-	for (int i=user_dna_sequence.length()-1;i>=0; i--)
+	for (int i=(int)user_dna_sequence.length()-1;i>=0; i--)
 	{
 		reverse_dna1 += user_dna_sequence[i];//유저의 역방향, reading frame DNA 저장
 	}
@@ -163,12 +163,30 @@ void Orf::OrfFinder(User user)
 }
 void Orf::IntronFinder()
 {
-	for (int a = 0; a < complete_orf.size(); a++)
+	intron_removed = complete_orf;
+
+	for (int a = 0; a < intron_removed.size(); a++)
 	{
-		for(int b=0;b<complete_orf[a][b].size();b++)
+
+		for(int b=0;b<intron_removed[a].size()-5;b++)//끝까지 못가게 하여 없는 인덱스를 넣지 않도록
 		{
-			if(complete_orf[a][b]=="GTA")
-			
+			if (intron_removed[a][b] == "GTA" && intron_removed[a][b+1] == "AGT")
+			{
+				for (int c = b + 1; c < intron_removed[a].size(); c++)
+				{
+					if(intron_removed[a][c-3]=="TTT"&&intron_removed[a][c-2]=="TTT")
+						if (intron_removed[a][c - 1][0] == 'T' && intron_removed[a][c - 1][1] == 'T')
+						{
+							if (intron_removed[a][c] == "CAG")
+							{
+								for (int i = b; i <= c; i++)
+								{
+									intron_removed[a][i] = "intron";//해당하는 범위를 모두 인트론으로 바꿈
+								}
+							}
+						}
+				}
+			}
 		}
 	}
 	
