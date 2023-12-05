@@ -175,6 +175,7 @@ void Orf::IntronFinder()
 				for (int c = b + 1; c < intron_removed[a].size(); c++)
 				{
 					if(intron_removed[a][c-3]=="TTT"&&intron_removed[a][c-2]=="TTT")
+					{
 						if (intron_removed[a][c - 1][0] == 'T' && intron_removed[a][c - 1][1] == 'T')
 						{
 							if (intron_removed[a][c] == "CAG")
@@ -183,8 +184,10 @@ void Orf::IntronFinder()
 								{
 									intron_removed[a][i] = "intron";//해당하는 범위를 모두 인트론으로 바꿈
 								}
+								break;
 							}
 						}
+					}
 				}
 			}
 		}

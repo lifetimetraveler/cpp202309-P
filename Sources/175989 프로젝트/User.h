@@ -5,15 +5,15 @@ using namespace std;
 
 //추출한 ORf의 인덱스를 저장하기 위함
 class SavedIndex
-{
-	int case_num;//시작 코돈과 스탑 코돈의 경우의 수. 0,1,2 세 가지 중에 하나를 저장
+{public:
+	int case_num = -1;//시작 코돈과 스탑 코돈의 경우의 수. 0,1,2 세 가지 중에 하나를 저장
 	//해서 구분
-    int start_index;// 시작 지점 인덱스
-	int stop_index;// 종료 지점 인덱스
+    int start_index=-1;// 시작 지점 인덱스
+	int stop_index = -1;// 종료 지점 인덱스
 	
 
-public:
-	SavedIndex(int case_num, int stat_index, int stop_index)
+
+	SavedIndex(int case_num, int start_index, int stop_index)
 	{
 		this->case_num = case_num;
 		this->start_index = start_index;
@@ -64,9 +64,9 @@ public:
 class Orf
 {
 	string original_seq;//받아온 분석할 서열을 저장
-    vector<SavedIndex> complete_index;//추출한 orf의 인덱스 값을 저장
+    
 public:
-	
+	vector<SavedIndex> complete_index;//추출한 orf의 인덱스 값을 저장//테스트를 위해 cout에서 쓰려고 퍼블릭
 	
 	Orf(string original_seq) { this->original_seq = original_seq; }//생성자
 	vector<string> orf1;//처리과정을 매끄럽게하기위해 스트링으로 세개씩 나누어서 저장
@@ -88,6 +88,8 @@ public:
 	void OrfFinder(User user);
 	//인트론을 찾아내는 함수
 	void IntronFinder();
+
+	
 	
 };
 

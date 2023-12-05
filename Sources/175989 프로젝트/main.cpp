@@ -1,5 +1,5 @@
 #include"user.h"
-
+#include <fstream>
 using namespace std;
 
 
@@ -7,7 +7,7 @@ using namespace std;
 int main() {
 	string name;//유저의 이름
 	string sequence;//유저의 서열
-
+	ifstream sequence_file("sequence.txt");//유저의 서열 파일
 	User user;//User의 이름, 서열, ORF범위, 다른 reading frame서열을
 	//저장하는 클래스
 
@@ -18,8 +18,16 @@ int main() {
 
 	//서열 입력
 	cout << "DNA서열:" << endl;
-	//cin >> sequence;
-	sequence = "AGTTTTAAAGGGCCCTTTAAAGGGCCCGTAAAAAGCCAAAAAATGGGGAAAGGGAAACCCAAAGGGTGATAATAGAAAAGATAATAGTGGGTTTCCCGGGGGGAAAGGGGTAAATGGGGAAAGGGAAACCCAAAGGGTGAAAATGGGGAAAGGGAAACCCAAAGGGTGAAGTTTTAAAGGGCCCTTTAAAGGGCCCGTAAAGTTTTAAAGGGCCCTTTAAAGGGCCCGTAAA";
+	if (!sequence_file)//오류 발생 시 메세지//이상이 없으면 서열 입력
+	{
+		cerr << "파일을 불러오지 못했습니다.";
+	}
+	else
+	{
+		sequence_file >> sequence;
+	}
+
+	//sequence = "AGTTTTAAAGGGCCCTTTAAAGGGCCCGTAAAAAGCCAAAAAATGGGGAAAGGGAAACCCAAAGGGTGATAATAGAAAAGATAATAGTGGGTTTCCCGGGGGGAAAGGGGTAAATGGGGAAAGGGAAACCCAAAGGGTGAAAATGGGGAAAGGGAAACCCAAAGGGTGAAGTTTTAAAGGGCCCTTTAAAGGGCCCGTAAAGTTTTAAAGGGCCCTTTAAAGGGCCCGTAAA";
 
 	//ORF 범위 입력
 	cout << "찾고자하는 ORF의 크기 : " << endl;
@@ -229,8 +237,32 @@ int main() {
 	}cout << endl << endl;
 
 
+	//오알에프 인덱스 테스트
+	for(int i=0;i<user_seq1.complete_index.size();i++)
+	{
+		cout << user_seq1.complete_index[i].case_num << " ";
+		cout << user_seq1.complete_index[i].start_index << " ";
+		cout << user_seq1.complete_index[i].stop_index<< " ";
+	}
 
+	//인트론 제거 테스트
+	user_seq1.IntronFinder();
+	if (user_seq1.intron_removed.empty())//벡터비어있으면 관련 안내 출력
+	{
+		cout << "ORF가 탐색되지 않았습니다.";
+	}
+	else//벡터가 차있다면 ORF를 출력
+	{//스트링 이중벡터에 존재하는 모든것을 출력.
+		cout << "찾은 ORF: ";
+		for (int k = 0; k < user_seq1.intron_removed.size(); k++)
+		{
+			for (int i = 0; i < user_seq1.intron_removed[k].size(); i++)
+			{
 
+				cout << user_seq1.intron_removed[k][i] << " ";
+			}cout << endl << "          ";
+		}
+	}cout << endl << endl;
 
 	return 0;
 }
