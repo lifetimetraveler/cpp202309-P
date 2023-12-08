@@ -86,7 +86,7 @@ public:
 	void IndexFinder();
 	//찾아낸 인덱스에 맞춰 서열을 저장하는 함수
 	void OrfFinder(User user);
-	//인트론을 찾아내는 함수
+	//인트론을 찾아내는 함수, 제거도
 	void IntronFinder();
 
 	

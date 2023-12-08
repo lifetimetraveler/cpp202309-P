@@ -238,28 +238,126 @@ int main() {
 
 
 	//오알에프 인덱스 테스트
-	for(int i=0;i<user_seq1.complete_index.size();i++)
-	{
-		cout << user_seq1.complete_index[i].case_num << " ";
-		cout << user_seq1.complete_index[i].start_index << " ";
-		cout << user_seq1.complete_index[i].stop_index<< " ";
-	}
+	//for(int i=0;i<user_seq1.complete_index.size();i++)
+	//{
+	//	cout << user_seq1.complete_index[i].case_num << " ";
+	//	cout << user_seq1.complete_index[i].start_index << " ";
+	//	cout << user_seq1.complete_index[i].stop_index<< " ";
+	//}
 
 	//인트론 제거 테스트
 	user_seq1.IntronFinder();
 	if (user_seq1.intron_removed.empty())//벡터비어있으면 관련 안내 출력
 	{
-		cout << "ORF가 탐색되지 않았습니다.";
+		cout << "ORF가 존재하지 않습니다.";
 	}
 	else//벡터가 차있다면 ORF를 출력
-	{//스트링 이중벡터에 존재하는 모든것을 출력.
-		cout << "찾은 ORF: ";
+	//스트링 이중벡터에 존재하는 모든것을 출력.
+	{
+		cout << "인트론 가공 후: ";
+		//찾은 ORF 서열의 수만큼 반복
 		for (int k = 0; k < user_seq1.intron_removed.size(); k++)
-		{
-			for (int i = 0; i < user_seq1.intron_removed[k].size(); i++)
+		{//각 ORF에서 string 벡터를 출력
+			for (int i = 0; i < user_seq1.intron_removed[k].size(); i++)//
 			{
 
 				cout << user_seq1.intron_removed[k][i] << " ";
+			}cout << endl << "          ";
+		}
+	}cout << endl << endl;
+
+	//인트론 제거 테스트
+	user_seq2.IntronFinder();
+	if (user_seq2.intron_removed.empty())//벡터비어있으면 관련 안내 출력
+	{
+		cout << "ORF가 존재하지 않습니다.";
+	}
+	else//벡터가 차있다면 ORF를 출력
+	{//스트링 이중벡터에 존재하는 모든것을 출력.
+		cout << "인트론 가공 후: ";
+		//찾은 ORF 서열의 수만큼 반복
+		for (int k = 0; k < user_seq2.intron_removed.size(); k++)
+		{//각 ORF에서 string 벡터를 출력
+			for (int i = 0; i < user_seq2.intron_removed[k].size(); i++)//
+			{
+
+				cout << user_seq2.intron_removed[k][i] << " ";
+			}cout << endl << "          ";
+		}
+	}cout << endl << endl;
+	//인트론 제거 테스트
+	user_seq3.IntronFinder();
+	if (user_seq3.intron_removed.empty())//벡터비어있으면 관련 안내 출력
+	{
+		cout << "ORF가 존재하지 않습니다.";
+	}
+	else//벡터가 차있다면 ORF를 출력
+	{//스트링 이중벡터에 존재하는 모든것을 출력.
+		cout << "인트론 가공 후: ";
+		//찾은 ORF 서열의 수만큼 반복
+		for (int k = 0; k < user_seq3.intron_removed.size(); k++)
+		{//각 ORF에서 string 벡터를 출력
+			for (int i = 0; i < user_seq3.intron_removed[k].size(); i++)//
+			{
+
+				cout << user_seq3.intron_removed[k][i] << " ";
+			}cout << endl << "          ";
+		}
+	}cout << endl << endl;
+	//인트론 제거 테스트
+	user_seq4.IntronFinder();
+	if (user_seq4.intron_removed.empty())//벡터비어있으면 관련 안내 출력
+	{
+		cout << "ORF가 존재하지 않습니다.";
+	}
+	else//벡터가 차있다면 ORF를 출력
+	{//스트링 이중벡터에 존재하는 모든것을 출력.
+		cout << "인트론 가공 후: ";
+		//찾은 ORF 서열의 수만큼 반복
+		for (int k = 0; k < user_seq4.intron_removed.size(); k++)
+		{//각 ORF에서 string 벡터를 출력
+			for (int i = 0; i < user_seq4.intron_removed[k].size(); i++)//
+			{
+
+				cout << user_seq4.intron_removed[k][i] << " ";
+			}cout << endl << "          ";
+		}
+	}cout << endl << endl;
+	//인트론 제거 테스트
+	user_seq5.IntronFinder();
+	if (user_seq5.intron_removed.empty())//벡터비어있으면 관련 안내 출력
+	{
+		cout << "ORF가 존재하지 않습니다.";
+	}
+	else//벡터가 차있다면 ORF를 출력
+	{//스트링 이중벡터에 존재하는 모든것을 출력.
+		cout << "인트론 가공 후: ";
+		//찾은 ORF 서열의 수만큼 반복
+		for (int k = 0; k < user_seq5.intron_removed.size(); k++)
+		{//각 ORF에서 string 벡터를 출력
+			for (int i = 0; i < user_seq5.intron_removed[k].size(); i++)//
+			{
+
+				cout << user_seq5.intron_removed[k][i] << " ";
+			}cout << endl << "          ";
+		}
+	}cout << endl << endl;
+	//인트론 제거 테스트
+	user_seq6.IntronFinder();
+	if (user_seq6.intron_removed.empty())//벡터비어있으면 관련 안내 출력
+	{
+		cout << "ORF가 존재하지 않습니다.";
+	}
+	else//벡터가 차있다면 ORF를 출력
+	{//스트링 이중벡터에 존재하는 모든것을 출력.
+		cout << "인트론 가공 후: ";
+		//찾은 ORF 서열의 수만큼 반복
+		for (int k = 0; k < user_seq6.intron_removed.size(); k++)
+		{//각 ORF에서 string 벡터를 출력
+			for (int i = 0; i < user_seq6.intron_removed[k].size(); i++)//
+			{
+
+				cout << user_seq6.intron_removed[k][i] << " ";
 			}cout << endl << "          ";
 		}
 	}cout << endl << endl;

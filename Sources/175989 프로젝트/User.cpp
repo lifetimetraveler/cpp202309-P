@@ -161,30 +161,33 @@ void Orf::OrfFinder(User user)
 		}
 	}
 }
+//인트론을 제거하는 함수
 void Orf::IntronFinder()
 {
-	intron_removed = complete_orf;
+	intron_removed = complete_orf;//찾은 orf를 인트론이 잘린 변수가 담길 곳에 복사
 
-	for (int a = 0; a < intron_removed.size(); a++)
+	for (int a = 0; a < intron_removed.size(); a++)//찾은 ORF의 수만큼 반복
 	{
 
 		for(int b=0;b<intron_removed[a].size()-5;b++)//끝까지 못가게 하여 없는 인덱스를 넣지 않도록
-		{
+		{//전체 서열을 탐색
+            //탐색하다가 인트론의 시작 부분을 만나면
 			if (intron_removed[a][b] == "GTA" && intron_removed[a][b+1] == "AGT")
 			{
-				for (int c = b + 1; c < intron_removed[a].size(); c++)
-				{
+				for (int c = b + 1; c < intron_removed[a].size(); c++)//그 이후의 서열을 탐색
+				{   //인트론의 끝부분에 해당하는 부분을 찾으면
 					if(intron_removed[a][c-3]=="TTT"&&intron_removed[a][c-2]=="TTT")
 					{
 						if (intron_removed[a][c - 1][0] == 'T' && intron_removed[a][c - 1][1] == 'T')
 						{
 							if (intron_removed[a][c] == "CAG")
 							{
-								for (int i = b; i <= c; i++)
+								for (int i = b; i <= c; i++)//찾아낸 인트론의 처음과 끝을,
 								{
 									intron_removed[a][i] = "intron";//해당하는 범위를 모두 인트론으로 바꿈
 								}
-								break;
+								break;//완료한 후 for문을 탈출 하여 가장 처음으로 만난 인트론의 끝부분까지만
+								//인트론으로 바꿈.
 							}
 						}
 					}
