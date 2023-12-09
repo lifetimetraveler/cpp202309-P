@@ -72,6 +72,8 @@ public:
 	vector<string> orf1;//처리과정을 매끄럽게하기위해 스트링으로 세개씩 나누어서 저장
 	vector<vector<string>> complete_orf;//orf를 추출한 벡터를 저장하기위한 이중 벡터
 	vector<vector<string>> intron_removed;//인트론이 제거된 
+	vector<vector<string>> protein;//amino acid형태로 변환한 ORF를 저장하기 위함
+
 	//orf에서 atg(start codon)을 저장
 	vector<int> atg_index;
 
@@ -88,7 +90,8 @@ public:
 	void OrfFinder(User user);
 	//인트론을 찾아내는 함수, 제거도
 	void IntronFinder();
-
+	//amino acid형태로 변환하기 위한 함수
+	void CodonDecipher();
 	
 	
 };

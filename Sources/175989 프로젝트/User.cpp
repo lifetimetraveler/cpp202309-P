@@ -197,3 +197,17 @@ void Orf::IntronFinder()
 	}
 	
 }
+
+void Orf::CodonDecipher()
+{
+	protein = intron_removed;
+	for (int a = 0; a < protein.size(); a++)
+	{
+		for(int b=0;b<protein[a].size();b++)//각각 저장된 orf를 탐색
+		{
+			string temp_codon = protein[a][b];
+			if(temp_codon=="")
+
+		}
+	}
+}
