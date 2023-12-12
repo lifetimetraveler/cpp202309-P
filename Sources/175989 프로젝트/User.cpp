@@ -206,7 +206,48 @@ void Orf::CodonDecipher()
 		for(int b=0;b<protein[a].size();b++)//각각 저장된 orf를 탐색
 		{
 			string temp_codon = protein[a][b];
-			if(temp_codon=="")
+			if (temp_codon == "UUU" || "UUC")
+				protein[a][b] = " F ";
+			else if(temp_codon == "UUA" || "UUG"||"CUU"||"CUC"||"CUA"||"CUG")
+				protein[a][b] = " L ";
+			else if (temp_codon == "AUU" || "AUC" || "AUA")
+				protein[a][b] = " L ";
+			else if (temp_codon == "AUG")
+				protein[a][b] = " M ";
+			else if (temp_codon == "GUU" || "GUC" || "GUA" || "GUG")
+				protein[a][b] = " V ";
+			else if (temp_codon == "UCU" || "UCC" || "UCA" || "UCG" || "AGU" || "AGC")
+				protein[a][b] = " S ";
+			else if (temp_codon == "CCU" || temp_codon == "CCC" || temp_codon == "CCA" || temp_codon == "CCG")
+				protein[a][b] = " P ";
+			else if (temp_codon == "ACU" || temp_codon == "ACC" || temp_codon == "ACA" || temp_codon == "ACG")
+				protein[a][b] = " T ";
+			else if (temp_codon == "GCU" || temp_codon == "GCC" || temp_codon == "GCA" || temp_codon == "GCG")
+				protein[a][b] = " A ";
+			else if (temp_codon == "UAU" || temp_codon == "UAC")
+				protein[a][b] = " Y ";
+			else if (temp_codon == "CAU" || temp_codon == "CAC")
+				protein[a][b] = " H ";
+			else if (temp_codon == "CAA" || temp_codon == "CAG")
+				protein[a][b] = " Q ";
+			else if (temp_codon == "AAU" || temp_codon == "AAC")
+				protein[a][b] = " N ";
+			else if (temp_codon == "AAA" || temp_codon == "AAG")
+				protein[a][b] = " K ";
+			else if (temp_codon == "GAU" || temp_codon == "GAC")
+				protein[a][b] = " D ";
+			else if (temp_codon == "GAA" || temp_codon == "GAG")
+				protein[a][b] = " E ";
+			else if (temp_codon == "UGU" || temp_codon == "UGC")
+				protein[a][b] = " C ";
+			else if (temp_codon == "UGG")
+				protein[a][b] = " W ";
+			else if (temp_codon == "CGU" || temp_codon == "CGC" || temp_codon == "CGA" || temp_codon == "CGG" || temp_codon == "AGA" || temp_codon == "AGG")
+				protein[a][b] = " R ";
+			else if (temp_codon == "GGU" || temp_codon == "GGC" || temp_codon == "GGA" || temp_codon == "GGG")
+				protein[a][b] = " G ";
+			else if (temp_codon == "UAA" || temp_codon == "UAG" || temp_codon == "UGA")
+				protein[a][b] = "stop";
 
 		}
 	}
