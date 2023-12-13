@@ -198,57 +198,57 @@ void Orf::IntronFinder()
 	
 }
 
+//인트론 제거된 ORF를 단백질화 시키는 함수
 void Orf::CodonDecipher()
 {
 	protein = intron_removed;
-	for (int a = 0; a < protein.size(); a++)
+	for (int a = 0; a < protein.size(); a++)//찾은 ORF에 접근
 	{
-		for(int b=0;b<protein[a].size();b++)//각각 저장된 orf를 탐색
-		{
-			string temp_codon = protein[a][b];
-			if (temp_codon == "UUU" || "UUC")
+		for(int b=0;b<protein[a].size();b++)//각각 저장된 orf 안의 string들을 탐색
+		{//그에 맞는 코돈을 만나면 protein 변수에 단백질로 바꿔서 저장.
+			string pro_cpy = protein[a][b];
+			if (pro_cpy == "TTT" || pro_cpy == "TTC")
 				protein[a][b] = " F ";
-			else if(temp_codon == "UUA" || "UUG"||"CUU"||"CUC"||"CUA"||"CUG")
+			else if(pro_cpy == "TTA" || pro_cpy == "TTG"|| pro_cpy == "CTT"|| pro_cpy == "CTC"|| pro_cpy == "CTA"|| pro_cpy == "CTG")
 				protein[a][b] = " L ";
-			else if (temp_codon == "AUU" || "AUC" || "AUA")
+			else if (pro_cpy == "ATT" || pro_cpy == "ATC" || pro_cpy == "ATA")
 				protein[a][b] = " L ";
-			else if (temp_codon == "AUG")
+			else if (pro_cpy == "ATG")
 				protein[a][b] = " M ";
-			else if (temp_codon == "GUU" || "GUC" || "GUA" || "GUG")
+			else if (pro_cpy == "GTT" || pro_cpy == "GTC" || pro_cpy == "GTA" || pro_cpy == "GTG")
 				protein[a][b] = " V ";
-			else if (temp_codon == "UCU" || "UCC" || "UCA" || "UCG" || "AGU" || "AGC")
+			else if (pro_cpy == "TCT" || pro_cpy == "TCC" || pro_cpy == "TCA" || pro_cpy == "TCG" || pro_cpy == "AGT" || pro_cpy == "AGC")
 				protein[a][b] = " S ";
-			else if (temp_codon == "CCU" || temp_codon == "CCC" || temp_codon == "CCA" || temp_codon == "CCG")
+			else if (pro_cpy == "CCT" || pro_cpy == "CCC" || pro_cpy == "CCA" || pro_cpy == "CCG")
 				protein[a][b] = " P ";
-			else if (temp_codon == "ACU" || temp_codon == "ACC" || temp_codon == "ACA" || temp_codon == "ACG")
+			else if (pro_cpy == "ACT" || pro_cpy == "ACC" || pro_cpy == "ACA" || pro_cpy == "ACG")
 				protein[a][b] = " T ";
-			else if (temp_codon == "GCU" || temp_codon == "GCC" || temp_codon == "GCA" || temp_codon == "GCG")
+			else if (pro_cpy == "GCT" || pro_cpy == "GCC" || pro_cpy == "GCA" || pro_cpy == "GCG")
 				protein[a][b] = " A ";
-			else if (temp_codon == "UAU" || temp_codon == "UAC")
+			else if (pro_cpy == "TAT" || pro_cpy == "TAC")
 				protein[a][b] = " Y ";
-			else if (temp_codon == "CAU" || temp_codon == "CAC")
+			else if (pro_cpy == "CAT" || pro_cpy == "CAC")
 				protein[a][b] = " H ";
-			else if (temp_codon == "CAA" || temp_codon == "CAG")
+			else if (pro_cpy == "CAA" || pro_cpy == "CAG")
 				protein[a][b] = " Q ";
-			else if (temp_codon == "AAU" || temp_codon == "AAC")
+			else if (pro_cpy == "AAT" || pro_cpy == "AAC")
 				protein[a][b] = " N ";
-			else if (temp_codon == "AAA" || temp_codon == "AAG")
+			else if (pro_cpy == "AAA" || pro_cpy == "AAG")
 				protein[a][b] = " K ";
-			else if (temp_codon == "GAU" || temp_codon == "GAC")
+			else if (pro_cpy == "GAT" || pro_cpy == "GAC")
 				protein[a][b] = " D ";
-			else if (temp_codon == "GAA" || temp_codon == "GAG")
+			else if (pro_cpy == "GAA" || pro_cpy == "GAG")
 				protein[a][b] = " E ";
-			else if (temp_codon == "UGU" || temp_codon == "UGC")
+			else if (pro_cpy == "TGT" || pro_cpy == "TGC")
 				protein[a][b] = " C ";
-			else if (temp_codon == "UGG")
+			else if (pro_cpy == "TGG")
 				protein[a][b] = " W ";
-			else if (temp_codon == "CGU" || temp_codon == "CGC" || temp_codon == "CGA" || temp_codon == "CGG" || temp_codon == "AGA" || temp_codon == "AGG")
+			else if (pro_cpy == "CGT" || pro_cpy == "CGC" || pro_cpy == "CGA" || pro_cpy == "CGG" || pro_cpy == "AGA" || pro_cpy == "AGG")
 				protein[a][b] = " R ";
-			else if (temp_codon == "GGU" || temp_codon == "GGC" || temp_codon == "GGA" || temp_codon == "GGG")
+			else if (pro_cpy == "GGT" || pro_cpy == "GGC" || pro_cpy == "GGA" || pro_cpy == "GGG")
 				protein[a][b] = " G ";
-			else if (temp_codon == "UAA" || temp_codon == "UAG" || temp_codon == "UGA")
+			else if (pro_cpy == "TAA" || pro_cpy == "TAG" || pro_cpy == "TGA")
 				protein[a][b] = "stop";
-
 		}
 	}
 }
