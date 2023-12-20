@@ -8,6 +8,7 @@ int main() {
 	string name;//유저의 이름
 	string sequence;//유저의 서열
 	ifstream sequence_file("sequence.txt");//유저의 서열 파일
+	ofstream result("output.txt", ios::out | ios::trunc);//분석결과를 출력하기 위함.
 	User user;//User의 이름, 서열, ORF범위, 다른 reading frame서열을
 	//저장하는 클래스
 
@@ -134,8 +135,21 @@ int main() {
 			}cout << endl;
 		}
 	}
-	cout << endl << endl;
-
+	cout << endl ;
+	user_seq1.KozakCalculator();
+	cout << "Kozak score : ";
+	for(int i=0;i<user_seq1.complete_index.size();i++)
+	{
+		if (user_seq1.complete_score[i] == 7777)
+		{
+			cout << "계산불가"<<" ";
+		}
+		else
+		{
+			cout << user_seq1.complete_score[i] << " ";
+		}
+	}
+	cout<< endl << endl;
 
 
 	Orf user_seq2(user.GetDna2());//Orf객체에 분석할 서열 전달
@@ -205,6 +219,20 @@ int main() {
 
 				cout << user_seq2.protein[k][i] << " ";
 			}cout << endl;
+		}
+	}
+	cout << endl;
+	user_seq2.KozakCalculator();
+	cout << "Kozak score : ";
+	for (int i = 0; i < user_seq2.complete_index.size(); i++)
+	{
+		if (user_seq2.complete_score[i] == 7777)
+		{
+			cout << "계산불가" << " ";
+		}
+		else
+		{
+			cout << user_seq2.complete_score[i] << " ";
 		}
 	}
 	cout << endl << endl;
@@ -280,6 +308,20 @@ int main() {
 			}cout << endl;
 		}
 	}
+	cout << endl;
+	user_seq3.KozakCalculator();
+	cout << "Kozak score : ";
+	for (int i = 0; i < user_seq3.complete_index.size(); i++)
+	{
+		if (user_seq3.complete_score[i] == 7777)
+		{
+			cout << "계산불가" << " ";
+		}
+		else
+		{
+			cout << user_seq3.complete_score[i] << " ";
+		}
+	}
 	cout << endl << endl;
 
 
@@ -349,6 +391,20 @@ int main() {
 
 				cout << user_seq4.protein[k][i] << " ";
 			}cout << endl;
+		}
+	}
+	cout << endl;
+	user_seq4.KozakCalculator();
+	cout << "Kozak score : ";
+	for (int i = 0; i < user_seq4.complete_index.size(); i++)
+	{
+		if (user_seq4.complete_score[i] == 7777)
+		{
+			cout << "계산불가" << " ";
+		}
+		else
+		{
+			cout << user_seq4.complete_score[i] << " ";
 		}
 	}
 	cout << endl << endl;
@@ -421,6 +477,20 @@ int main() {
 
 				cout << user_seq5.protein[k][i] << " ";
 			}cout << endl;
+		}
+	}
+	cout << endl;
+	user_seq5.KozakCalculator();
+	cout << "Kozak score : ";
+	for (int i = 0; i < user_seq5.complete_index.size(); i++)
+	{
+		if (user_seq5.complete_score[i] == 7777)
+		{
+			cout << "계산불가" << " ";
+		}
+		else
+		{
+			cout << user_seq5.complete_score[i] << " ";
 		}
 	}
 	cout << endl << endl;
@@ -497,12 +567,23 @@ int main() {
 			}cout << endl;
 		}
 	}
+	cout << endl;
+	user_seq6.KozakCalculator();
+	cout << "Kozak score : ";
+	for (int i = 0; i < user_seq6.complete_index.size(); i++)
+	{
+		if (user_seq6.complete_score[i] == 7777)
+		{
+			cout << "계산불가" << " ";
+		}
+		else
+		{
+			cout << user_seq6.complete_score[i] << " ";
+		}
+	}
 	cout << endl << endl;
 
-
-
-
-	//오알에프 인덱스 테스트
+//오알에프 인덱스 테스트
 	//for(int i=0;i<user_seq1.complete_index.size();i++)
 	//{
 	//	cout << user_seq1.complete_index[i].case_num << " ";
@@ -510,6 +591,20 @@ int main() {
 	//	cout << user_seq1.complete_index[i].stop_index<< " ";
 	//}
 
+	//결과 출력
+	string out_sequence = user.GetSequence();
+	for (char ori:out_sequence)//유저에게 받은 서열 출력
+	{
+		result << ori;
+	}
+	result << endl;
+	//
+	for (int i = 0; i < user_seq1.complete_orf.size(); i++)
+	{
+		result << "    " << "avdDDS";
+	}
+
+	
 
 
 

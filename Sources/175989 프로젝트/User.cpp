@@ -252,3 +252,33 @@ void Orf::CodonDecipher()
 		}
 	}
 }
+
+void Orf::KozakCalculator()
+{
+	for (int i = 0; i < complete_index.size(); i++)
+	{
+		int num = complete_index[i].start_index;//start인덱스는 저장된 스트링에서의 번호니까
+		int sequence_num = num * 3 + 1;//실제 서열에서의 순번을 저장.
+		int score = 0;//점수를 저장하기 위한 변수
+		//만약 시작코돈 주변을 접근하려는데 그곳에 서열이 존재하지 않을 경우. 오류상황.
+		if (sequence_num-3<0||sequence_num+3>original_seq.length())
+		{
+			score=7777;
+		}
+		//오류가 아닌경우
+		else
+		{
+			//염기서열의 +4위치에 C또는 G가 있으면 1점 가산.
+			if (original_seq[sequence_num + 3] == 'C' || original_seq[sequence_num + 3] == 'G')
+				score += 1;
+			//염기서열의 -2위치에 A 또는 G가 있으면 1점 가산.
+		    if(original_seq[sequence_num-2]=='A'|| original_seq[sequence_num - 2] == 'G')
+				score += 1;
+			//염기서열의 -3위치에 A 또는 G가 있으면 1점 가산.
+			if(original_seq[sequence_num - 3] == 'A' || original_seq[sequence_num - 3] == 'G')
+				score+=3;
+		}
+		complete_score.push_back(score);//합산한 최종 스코어를 저장.
+	}
+}
+

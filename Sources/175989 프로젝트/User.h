@@ -67,7 +67,7 @@ class Orf
     
 public:
 	vector<SavedIndex> complete_index;//추출한 orf의 인덱스 값을 저장//테스트를 위해 cout에서 쓰려고 퍼블릭
-	
+	vector<int> complete_score;//코작 점수를 저장하기 위한 배열
 	Orf(string original_seq) { this->original_seq = original_seq; }//생성자
 	vector<string> orf1;//처리과정을 매끄럽게하기위해 스트링으로 세개씩 나누어서 저장
 	vector<vector<string>> complete_orf;//orf를 추출한 벡터를 저장하기위한 이중 벡터
@@ -92,6 +92,10 @@ public:
 	void IntronFinder();
 	//amino acid형태로 변환하기 위한 함수
 	void CodonDecipher();
+	//kozak score를 계산하는 함수. score를 반환.
+	void KozakCalculator();
+	
+
 	
 	
 };
