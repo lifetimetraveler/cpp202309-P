@@ -82,6 +82,10 @@ public:
 	vector<int> taa_index;
 	vector<int> tag_index;
 
+	string GetOriSeq();
+
+
+
 	//서열을 벡터화하는 함수
 	void TransferSeq();
 	//벡터화한 서열에서 stop, start codon을 찾는 함수

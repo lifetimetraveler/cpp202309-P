@@ -64,6 +64,11 @@ string User::GetRDna3() {
 }
 
 
+string Orf::GetOriSeq()
+{
+	return original_seq;
+}
+
 //스트링형태의 서열을 세개씩 나눠서 스트링 벡터에 저장하여
 //추후에 가공을 쉽게한다.
 void Orf::TransferSeq()//즉, 스트링 벡터화하는 함수
@@ -184,7 +189,7 @@ void Orf::IntronFinder()
 							{
 								for (int i = b; i <= c; i++)//찾아낸 인트론의 처음과 끝을,
 								{
-									intron_removed[a][i] = "intron";//해당하는 범위를 모두 인트론으로 바꿈
+									intron_removed[a][i] = "itr";//해당하는 범위를 모두 인트론으로 바꿈
 								}
 								break;//완료한 후 for문을 탈출 하여 가장 처음으로 만난 인트론의 끝부분까지만
 								//인트론으로 바꿈.
@@ -248,7 +253,7 @@ void Orf::CodonDecipher()
 			else if (pro_cpy == "GGT" || pro_cpy == "GGC" || pro_cpy == "GGA" || pro_cpy == "GGG")
 				protein[a][b] = " G ";
 			else if (pro_cpy == "TAA" || pro_cpy == "TAG" || pro_cpy == "TGA")
-				protein[a][b] = "stop";
+				protein[a][b] = "stp";
 		}
 	}
 }

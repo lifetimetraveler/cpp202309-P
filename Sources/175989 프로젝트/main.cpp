@@ -27,6 +27,7 @@ int main() {
 	{
 		sequence_file >> sequence;
 	}
+	sequence_file.close();
 
 	//sequence = "AGTTTTAAAGGGCCCTTTAAAGGGCCCGTAAAAAGCCAAAAAATGGGGAAAGGGAAACCCAAAGGGTGATAATAGAAAAGATAATAGTGGGTTTCCCGGGGGGAAAGGGGTAAATGGGGAAAGGGAAACCCAAAGGGTGAAAATGGGGAAAGGGAAACCCAAAGGGTGAAGTTTTAAAGGGCCCTTTAAAGGGCCCGTAAAGTTTTAAAGGGCCCTTTAAAGGGCCCGTAAA";
 
@@ -135,21 +136,21 @@ int main() {
 			}cout << endl;
 		}
 	}
-	cout << endl ;
+	cout << endl;
 	user_seq1.KozakCalculator();
 	cout << "Kozak score : ";
-	for(int i=0;i<user_seq1.complete_index.size();i++)
+	for (int i = 0; i < user_seq1.complete_index.size(); i++)
 	{
 		if (user_seq1.complete_score[i] == 7777)
 		{
-			cout << "계산불가"<<" ";
+			cout << "계산불가" << " ";
 		}
 		else
 		{
 			cout << user_seq1.complete_score[i] << " ";
 		}
 	}
-	cout<< endl << endl;
+	cout << endl << endl;
 
 
 	Orf user_seq2(user.GetDna2());//Orf객체에 분석할 서열 전달
@@ -583,28 +584,95 @@ int main() {
 	}
 	cout << endl << endl;
 
-//오알에프 인덱스 테스트
-	//for(int i=0;i<user_seq1.complete_index.size();i++)
-	//{
-	//	cout << user_seq1.complete_index[i].case_num << " ";
-	//	cout << user_seq1.complete_index[i].start_index << " ";
-	//	cout << user_seq1.complete_index[i].stop_index<< " ";
-	//}
+	//오알에프 인덱스 테스트
+	for (int i = 0; i < user_seq1.complete_index.size(); i++)
+	{
+		cout << user_seq1.complete_index[i].case_num << " ";
+		cout << user_seq1.complete_index[i].start_index << " ";
+		cout << user_seq1.complete_index[i].stop_index << " ";
+	}
+
+
 
 	//결과 출력
 	string out_sequence = user.GetSequence();
-	for (char ori:out_sequence)//유저에게 받은 서열 출력
+	for (char ori : out_sequence)//유저에게 받은 서열 출력
 	{
 		result << ori;
 	}
 	result << endl;
-	//
-	for (int i = 0; i < user_seq1.complete_orf.size(); i++)
+	//찾은 cds 파일로 출력
+	for (int a = 0; a < user_seq1.protein.size(); a++)
 	{
-		result << "    " << "avdDDS";
+		for (int i = 0; i < user_seq1.complete_index[a].start_index; i++)
+				{
+					result << "   ";
+				}
+		for (int b = 0; b < user_seq1.protein[a].size(); b++)
+		{
+			result << user_seq1.protein[a][b];
+		}result << endl;
+	}
+	for (int a = 0; a < user_seq2.protein.size(); a++)
+	{
+		result << " ";
+		for (int i = 0; i < user_seq2.complete_index[a].start_index; i++)
+		{
+			result << "   ";
+		}
+		for (int b = 0; b < user_seq2.protein[a].size(); b++)
+		{
+			result << user_seq2.protein[a][b];
+		}result << endl;
+	}
+	for (int a = 0; a < user_seq3.protein.size(); a++)
+	{
+		result << "  ";
+		for (int i = 0; i < user_seq3.complete_index[a].start_index; i++)
+		{
+			result << "   ";
+		}
+		for (int b = 0; b < user_seq3.protein[a].size(); b++)
+		{
+			result << user_seq3.protein[a][b];
+		}result << endl;
+	}
+	for (int a = 0; a < user_seq4.protein.size(); a++)
+	{
+		for (int i = 0; i < out_sequence.length() - 3 * (user_seq4.complete_index[a].stop_index+1); i++)
+		{
+			result << " ";
+		}
+		for (int b = user_seq4.protein[a].size()-1; b>=0; b--)
+		{
+			result << user_seq4.protein[a][b];
+		}result << endl;
+	}
+	for (int a = 0; a < user_seq5.protein.size(); a++)
+	{
+		for (int i = 0; i < out_sequence.length() - 3 * (user_seq5.complete_index[a].stop_index+1) - 1; i++)
+		{
+			result << " ";
+		}
+		for (int b = user_seq5.protein[a].size() - 1; b >= 0; b--)
+		{
+			result << user_seq5.protein[a][b];
+		}result << endl;
+	}
+	for (int a = 0; a < user_seq6.protein.size(); a++)
+	{
+		for (int i = 0; i < out_sequence.length() - 3 * (user_seq6.complete_index[a].stop_index+1) - 2; i++)
+		{
+			result << " ";
+		}
+		for (int b = user_seq6.protein[a].size() - 1; b >= 0; b--)
+		{
+			result << user_seq6.protein[a][b];
+		}result << endl;
 	}
 
-	
+
+
 
 
 
