@@ -9,14 +9,18 @@ int main() {
   ifstream sequence_file("sequence.txt");  // 유저의 서열 파일
   User user;  // User의 이름, 서열, ORF범위, 다른 reading frame서열을
   // 저장하는 클래스
-
+  cout << "입력할 서열을 소스와 같은 위치에 'sequence.txt'로 저장하여 주세요."
+       << endl;
+  cout << "분석 결과는 입력한 이름과 동일한 txt파일로 출력됩니다."<<endl;
+  cout << "메모장에서 서식>글꼴>courier로 교체해주세요. monotype 글꼴이면 "
+          "됩니다."
+       << endl;
   // 이름입력, 테스트를 위해 임의의 이름과 서열, 범위를 사용했습니다.
   cout << "이름: " << endl;
-  //cin >> name;
-  name = "김철수";//테스트용
+   cin >> name;
+  //name = "김철수";  // 테스트용
 
   // 서열 입력
-  cout << "DNA서열:" << endl;
   try {
     if (!sequence_file)  // 오류 발생 시 메세지//이상이 없으면 서열 입력
     {
@@ -28,12 +32,12 @@ int main() {
   } catch (invalid_argument& e) {
     cout << "에러: " << e.what() << endl;
   }
-
+  cout << "찾고자하는 범위 입력(시작,끝)"<<endl;
   // ORF 범위 입력
-  cout << "찾고자하는 ORF의 크기 : " << endl;
-  //cin >> user.range1 >> user.range2;  // ORF의 범위를 입력
-   user.range1 = 1;
-   user.range2 = 100;
+  //cout << "찾고자하는 ORF의 크기 : " << endl;
+  cin >> user.range1 >> user.range2;  // ORF의 범위를 입력
+ // user.range1 = 1;
+  //user.range2 = 100;
   //  range1에 더 큰 수를 입력한 경우, 둘을 바꿔준다.
   if (user.range2 < user.range1) {
     int temp_length = user.range1;
@@ -56,9 +60,10 @@ int main() {
   cout << "dna4: " << user.GetRDna1() << endl;
   cout << "dna5: " << user.GetRDna2() << endl;
   cout << "dna6: " << user.GetRDna3() << endl << endl;
- 
-  //여기부터 파일 출력 전까지는 동일한 과정을 6번 반복하되 reading frame이 다르게 저장된 객체를 사용합니다.
-  // 각 6개의 서열에 대해 같은 방법으로 분석. 6번 반복
+
+  // 여기부터 파일 출력 전까지는 동일한 과정을 6번 반복하되 reading frame이
+  // 다르게 저장된 객체를 사용합니다.
+  //  각 6개의 서열에 대해 같은 방법으로 분석. 6번 반복
   Orf user_seq1(user.GetDna1());  // Orf객체에 분석할 서열 전달및 Orf 객체 생성
   user_seq1.TransferSeq();  // 서열의 스트링 벡터화
   cout << "벡터화dna1: " << endl;
@@ -71,7 +76,6 @@ int main() {
 
   user_seq1.IndexFinder();  // start codon과 stop codon에 해당하는 인덱스 찾기
   user_seq1.OrfFinder(user);  // orf 찾기
-
   // 완료한 orf 출력
   cout << "찾은 ORF: " << endl;
   if (user_seq1.complete_orf.empty())  // 벡터비어있으면 관련 안내 출력
@@ -79,7 +83,7 @@ int main() {
     cout << "ORF가 탐색되지 않았습니다." << endl;
   } else  // 벡터가 차있다면 ORF를 출력
   {       // 스트링 이중벡터에 존재하는 모든것을 출력.
-      //찾은 ORF를 모두 출력
+     // 찾은 ORF를 모두 출력
     for (int k = 0; k < user_seq1.complete_orf.size(); k++) {
       for (int i = 0; i < user_seq1.complete_orf[k].size(); i++) {
         cout << user_seq1.complete_orf[k][i] << " ";
@@ -135,15 +139,15 @@ int main() {
   cout << "Kozak score : ";
   for (int i = 0; i < user_seq1.complete_index.size(); i++) {
     // ORF가 너무 짧다는 등의 이유로 너무 계산에 필요한 인덱스에 접근 불가할 때
-    if (user_seq1.complete_score[i] == 7777) {//오류 메시지 출력
+    if (user_seq1.complete_score[i] == 7777) {  // 오류 메시지 출력
       cout << "계산불가"
            << " ";
-    } else {// 그것이 아니면 벡터(score)를 출력
+    } else {  // 그것이 아니면 벡터(score)를 출력
       cout << user_seq1.complete_score[i] << " ";
     }
   }
   cout << endl << endl;
-  //여기까지를 동일하게 5번 다른 객체(다른 reading frame)로 반복
+  // 여기까지를 동일하게 5번 다른 객체(다른 reading frame)로 반복
 
   Orf user_seq2(user.GetDna2());  // Orf객체에 분석할 서열 전달
   user_seq2.TransferSeq();        // 서열의 스트링 벡터화
@@ -209,7 +213,7 @@ int main() {
     }
   }
   cout << endl;
-  //Kozak score 계산. 원리는 위의 user_seq1과 동일
+  // Kozak score 계산. 원리는 위의 user_seq1과 동일
   user_seq2.KozakCalculator();
   cout << "Kozak score : ";
   for (int i = 0; i < user_seq2.complete_index.size(); i++) {
@@ -528,10 +532,10 @@ int main() {
   cout << endl << endl;
 
   // 오알에프 인덱스 테스트
- // for (int i = 0; i < user_seq1.complete_index.size(); i++) {
-   // cout << user_seq1.complete_index[i].case_num << " ";
-    //cout << user_seq1.complete_index[i].start_index << " ";
-    //cout << user_seq1.complete_index[i].stop_index << " ";
+  // for (int i = 0; i < user_seq1.complete_index.size(); i++) {
+  // cout << user_seq1.complete_index[i].case_num << " ";
+  // cout << user_seq1.complete_index[i].start_index << " ";
+  // cout << user_seq1.complete_index[i].stop_index << " ";
   //}
 
   // 파일로 결과 출력
@@ -551,48 +555,49 @@ int main() {
   // orf가 시작하는 곳과 원래서열과의 관계를 나타내기 위해, 앞만큼 공간을
   // 주기위해 공란으로 처리
   // user_seq1의 결과를 파일에 출력
-  for (int a = 0; a < user_seq1.protein.size();
-       a++)  // 찾은 ORF의 수만큼 반복
+  // user_seq1~3은 정방향이기 때문에 start codon의 위치까지 공란추가
+  for (int a = 0; a < user_seq1.protein.size(); a++)  // 찾은 ORF의 수만큼 반복
   {
     for (int i = 0; i < user_seq1.complete_index[a].start_index; i++) {
-      result << "   ";//공란추가
+      result << "   ";  // 공란추가
     }
     for (int b = 0; b < user_seq1.protein[a].size(); b++) {
-      result << user_seq1.protein[a][b];//단백질 서열출력
+      result << user_seq1.protein[a][b];  // 단백질 서열출력
     }
     result << endl;
   }
   // user_seq2의 결과를 파일에 출력
   for (int a = 0; a < user_seq2.protein.size(); a++) {
-    result << " ";//공란추가
+    result << " ";  // 공란추가
     for (int i = 0; i < user_seq2.complete_index[a].start_index; i++) {
-      result << "   ";//공란추가
+      result << "   ";  // 공란추가
     }
     for (int b = 0; b < user_seq2.protein[a].size(); b++) {
-      result << user_seq2.protein[a][b];//단백질 서열출력
+      result << user_seq2.protein[a][b];  // 단백질 서열출력
     }
     result << endl;
   }
   // user_seq3의 결과를 파일에 출력
   for (int a = 0; a < user_seq3.protein.size(); a++) {
-    result << "  ";//공란추가
+    result << "  ";  // 공란추가
     for (int i = 0; i < user_seq3.complete_index[a].start_index; i++) {
-      result << "   ";//공란추가
+      result << "   ";  // 공란추가
     }
     for (int b = 0; b < user_seq3.protein[a].size(); b++) {
-      result << user_seq3.protein[a][b];//단백질 서열출력
+      result << user_seq3.protein[a][b];  // 단백질 서열출력
     }
     result << endl;
   }
+  // user_seq4~6은 역방향이기 때문에 stop codon와 서열의 차이만큼 공란추가
   // user_seq4의 결과를 파일에 출력
   for (int a = 0; a < user_seq4.protein.size(); a++) {
     for (int i = 0; i < out_sequence.length() -
                             3 * (user_seq4.complete_index[a].stop_index + 1);
          i++) {
-      result << " ";//공란추가
+      result << " ";  // 공란추가
     }
     for (int b = user_seq4.protein[a].size() - 1; b >= 0; b--) {
-      result << user_seq4.protein[a][b];//단백질 서열출력
+      result << user_seq4.protein[a][b];  // 단백질 서열출력
     }
     result << endl;
   }
@@ -602,10 +607,10 @@ int main() {
          i < out_sequence.length() -
                  3 * (user_seq5.complete_index[a].stop_index + 1) - 1;
          i++) {
-      result << " ";//공란추가
+      result << " ";  // 공란추가
     }
     for (int b = user_seq5.protein[a].size() - 1; b >= 0; b--) {
-      result << user_seq5.protein[a][b];//단백질 서열출력
+      result << user_seq5.protein[a][b];  // 단백질 서열출력
     }
     result << endl;
   }
@@ -615,14 +620,15 @@ int main() {
          i < out_sequence.length() -
                  3 * (user_seq6.complete_index[a].stop_index + 1) - 2;
          i++) {
-      result << " ";//공란추가
+      result << " ";  // 공란추가
     }
     for (int b = user_seq6.protein[a].size() - 1; b >= 0; b--) {
-      result << user_seq6.protein[a][b];//단백질 서열출력
+      result << user_seq6.protein[a][b];  // 단백질 서열출력
     }
     result << endl;
   }
   result.close();
 
+ 
   return 0;
 }

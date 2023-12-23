@@ -51,8 +51,6 @@ string User::GetRDna1() { return reverse_dna1; }
 string User::GetRDna2() { return reverse_dna2; }
 string User::GetRDna3() { return reverse_dna3; }
 
-string Orf::GetOriSeq() { return original_seq; }
-
 // 스트링형태의 서열을 세개씩 나눠서 스트링 벡터에 저장하여
 // 추후에 가공을 쉽게한다.
 void Orf::TransferSeq()  // 즉, 스트링 벡터화하는 함수
@@ -111,6 +109,7 @@ void Orf::OrfFinder(User user) {
           complete_orf.push_back(temp_com_orf);
 
           // ORF가 추출 될 때마다의 인덱스 값을 저장
+          //저장된 stop codon의 종류에 따라 0, 1, 2를 추가로 저장
           SavedIndex temp_saved(0, atg_index[i], tga_index[j]);
           complete_index.push_back(temp_saved);
         }
@@ -154,7 +153,8 @@ void Orf::IntronFinder() {
       complete_orf;  // 찾은 orf를 인트론이 잘린 변수가 담길 곳에 복사
 
   for (int a = 0; a < intron_removed.size(); a++)  // 찾은 ORF의 수만큼 반복
-  {
+  {//너무 짧으면 존재하지 않는 인덱스에 접근가능하니, 다음 시행으로 넘어감.
+    if (intron_removed[a].size() < 6) continue;
     for (int b = 0; b < intron_removed[a].size() - 5;
          b++)  // 끝까지 못가게 하여 없는 인덱스를 넣지 않도록
     {          // 전체 서열을 탐색
@@ -208,7 +208,7 @@ void Orf::CodonDecipher() {
                pro_cpy == "CTC" || pro_cpy == "CTA" || pro_cpy == "CTG")
         protein[a][b] = " L ";
       else if (pro_cpy == "ATT" || pro_cpy == "ATC" || pro_cpy == "ATA")
-        protein[a][b] = " L ";
+        protein[a][b] = " I ";
       else if (pro_cpy == "ATG")
         protein[a][b] = " M ";
       else if (pro_cpy == "GTT" || pro_cpy == "GTC" || pro_cpy == "GTA" ||
@@ -256,11 +256,11 @@ void Orf::CodonDecipher() {
   }
 }
 
-void Orf::KozakCalculator() {
+void Orf::KozakCalculator() {//ORF 수만큼 반복
   for (int i = 0; i < complete_index.size(); i++) {
     int num = complete_index[i]
                   .start_index;  // start인덱스는 저장된 스트링에서의 번호니까
-    int sequence_num = num * 3 + 1;  // 실제 서열에서의 순번을 저장.
+    int sequence_num = num * 3 ;  // 실제 서열에서의 순번을 저장.
     int score = 0;                   // 점수를 저장하기 위한 변수
     // 만약 시작코돈 주변을 접근하려는데 그곳에 서열이 존재하지 않을 경우.
     // 오류상황.

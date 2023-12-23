@@ -19,7 +19,7 @@ class SavedIndex {
     this->stop_index = stop_index;
   }
 };
-// 잘린 orf에서 인트론의 orf와의 상대적 위치를 저장하기 위해
+// 잘린 orf에서 인트론의 orf와의 상대적 위치를 저장하기 위해. 사용 X.
 class IntronIndex {
   int intron_start;
   int intron_stop;
